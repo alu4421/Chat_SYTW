@@ -18,7 +18,7 @@ Modificar el chat visto en clase:
 - Despliege en [BitBucket](https://bitbucket.org/alu4421/chatsinatra)
 - Despliege en [Github](https://github.com/alu4421/Chat_SYTW.git)
 - Despliege en [Travis](https://travis-ci.org/alu4421/Chat_SYTW)
-- Despliege en [Heroku](http://short.herokuapp.com)
+- Despliege en [Heroku](http://chatina.herokuapp.com)
 
 
 -------
