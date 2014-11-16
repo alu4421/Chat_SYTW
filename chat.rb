@@ -3,7 +3,7 @@ require 'sinatra/reloader' if development?
 #set :port, 3000
 #set :environment, :production
 
-chat = ['welcome..']
+#chat = ['welcome..']
 
 get('/') { erb :index }
 
