@@ -6,7 +6,9 @@ h1 {
 .v-center {
   margin-top:80px;
 }
-
+.v-user {
+   margin-top: 4%; 
+}
 .chat
 {
     list-style: none;
