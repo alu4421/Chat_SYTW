@@ -1,23 +1,28 @@
 require 'sinatra' 
 require 'sinatra/reloader' if development?
+require 'pp'
 
 set :server, 'thin'
 chat = ['Hola']
 
+  enable :sessions               
+  set :session_secret, '*&(^#234a)'
 
 get('/') do
+ #if session[:auth_] then
+    
+  #else
+    
+  #end
   erb :index
 end
 
 get '/send' do
   return [404, {}, "Not an ajax request"] unless request.xhr?
-  chat << "#{request.ip} : #{params['text']}"
+  chat << "#{session[:nombre]} : #{params['text']}"
   nil
 end
-#stream(:keep_open) do |out|
-#    settings.connections &lt;&lt; out
-#    out.callback { settings.connections.delete(out) }
-#  end
+
 get '/update' do
   return [404, {}, "Not an ajax request"] unless request.xhr?
   @updates = chat[params['last'].to_i..-1] || []
@@ -31,8 +36,7 @@ get '/update' do
   HTML
 end
 
-#get '/limpiar' do
-#  @updates = []
-#  @last = 0
-#end
-
+get '/logout' do
+  session.clear
+  redirect '/'
+end
