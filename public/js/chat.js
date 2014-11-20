@@ -20,17 +20,3 @@ $('#text').keypress(
     },
   1000);
 })();
-
-/*(function() {
-  var last = 0;
-  setInterval(
-    function(){
-      $.get('/update',{last:last},
-        function(response){
-          last = $('<p>').html(response).find('span').data('last');
-          $('#chat').append(response);
-        }
-      );
-    },
-  1000);
-})();*/

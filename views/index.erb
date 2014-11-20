@@ -36,12 +36,16 @@
           <div id="navbar" class="navbar-main navbar-collapse collapse">
             <div class="nav navbar-nav navbar-right">
               <div class="v-user">
-                <form class="form-inline" role="form">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="usuario" placeholder="Introduce tu usario">
-                    <button type="submit" class="btn btn-success btn-sm">Enviar</button>
-                  </div>
-                </form>
+                <% if session[:alias] == nil %>
+                  <form class='form-inline' action='/registro' method='post' role='form'>
+                    <div class="form-group">
+                      <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Introduce tu usario">
+                      <button id ="registro" type="submit" class="btn btn-success btn-sm">Enviar</button>
+                    </div>
+                  </form>
+                <% else %>
+                  <a class="navbar-brand" href="/logout">Desconectar</a>
+                <% end %>
               </div>
             </div>
           </div><!--/.nav-collapse -->
