@@ -22,7 +22,7 @@
     </head>
 
     <body>
-      
+
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -38,14 +38,14 @@
             <div class="nav navbar-nav navbar-right">
               <div class="v-user">
                 <% if session[:alias] == nil %>
-                  <form class='form-inline' action='/registro' method='post' role='form'>
-                    <div class="form-group">
-                      <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Introduce tu usario" autofocus>
-                      <button id ="registro" type="submit" class="btn btn-success btn-sm">Enviar</button>
-                    </div>
-                  </form>
+                <form class='form-inline' action='/registro' method='post' role='form'>
+                  <div class="form-group">
+                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Introduzca su alias" autofocus>
+                    <button id ="registro" type="submit" class="btn btn-success btn-sm">Enviar</button>
+                  </div>
+                </form>
                 <% else %>
-                  <a class="navbar-brand" href="/logout">Desconectar :<%= session[:alias] %></a>
+                <a class="navbar-brand" href="/logout">Desconectar :<%= session[:alias] %></a>
                 <% end %>
               </div>
             </div>
@@ -55,10 +55,10 @@
       <div class="container v-center">
         <div class="row">
           <% if session[:error]%>
-            <div class="alert alert-danger alert-dismissable">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>¡Error!</strong> Nombre de usuario ya registrado. Intentelo de nuevo.
-            </div>
+          <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>¡Error!</strong> Alias ya registrado. Intentelo de nuevo.
+          </div>
           <% end %>
           <div class="col-xs-12 col-md-8">
             <div class="panel panel-primary">
@@ -73,55 +73,50 @@
                 </ul>
               </div>
             </div>
+            <% if session[:alias] != nil %>
             <div class="panel-footer">
               <div class="input-group">
                 <input id="text" type="text" class="form-control input-sm" placeholder="Type your message here..." autofocus/>
                 <span class="input-group-btn">
-                  <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+                  <button class="btn btn-warning btn-sm" name = "btn-chat" id="btn-chat">Send</button>
                 </span>
-               </div>
               </div>
-            </div> <!-- Fin Bloque central-->
-            <div class="col-md-4">
-              <div class="panel panel-primary">
-                <div class="panel-heading">ONLINE USERS</div>
-                <div class="panel-body">
-                  <ul class="media-list">
-                    <% if session[:alias] != nil %>
-                      <!-- Inicio Bloque Usarios-->
-                       <% @listaUsuarios.each do |usuario| %> 
-                        <li class="media">
-                          <div class="media-body">
-                            <div class="media">
-                              <a class="pull-left" href="#">
-                                <img class="media-object img-circle" style="max-height:50px;" src="/img/default.png" />
-                              </a>
-                              <div class="media-body" >
-                                <h3><%= usuario %> </h3>
-                                <small class="text-muted"><%= t=Time.now %></small>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      <% end %>
-                      <!-- Fin Bloque Usarios-->
-                    <% else %>
-                      <li class="media">
-                          <div class="media-body">
-                            <div class="media">
-                              <div class="media-body" >
-                                <h5>No disponible sin registro. </h5>
-                              </div>
-                            </div>
-                          </div>
-                      </li>
-                    <% end %>
-                  </ul>
-                </div>
+            </div>
+            <% else %>
+            <div class="alert alert-danger">
+              <strong>¡Registrese!</strong> ¡Deje de leer y participe! Introduzca su alias, para participar. ¡No espere más!
+            </div> 
+            <% end %>
+          </div> <!-- Fin Bloque central-->
+          <div class="col-md-4">
+            <div class="panel panel-primary">
+              <div class="panel-heading">ONLINE USERS</div>
+              <div class="panel-body">
+                <ul class="media-list">
+                  
+                  <% if session[:alias] != nil %>
+                  <!-- Inicio Bloque Usarios-->
+                  <div id="usuariosl">
+                  </div>
+                  <!-- Fin Bloque Usarios-->
+                  <% else %>
+                  <li class="media">
+                    <div class="media-body">
+                      <div class="media">
+                        <div class="media-body" >
+                          <h5>No disponible sin registro. </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <% end %>
+                  
+                </ul>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

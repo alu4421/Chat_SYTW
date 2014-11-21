@@ -1,13 +1,15 @@
 require 'sinatra' 
 require 'sinatra/reloader' if development?
 require 'pp'
+require 'date'
+require 'kronic'
 
 set :server, 'thin'
 
 enable :sessions             
 set :session_secret, '*&(^#234a)'
 
-chat = ['Hola']
+chat = ['Bienvenido a Chatina']
 usuarios = Array.new
 @listaUsuarios = []
 
@@ -29,13 +31,39 @@ get '/update' do
   @last = chat.size
   erb <<-"HTML"
       <% @updates.each do |phrase| %>
-        <%= phrase %> <br />
+      <%= phrase %> <br />
       <% end %>
       <span data-last="<%= @last %>"</span>
-
   HTML
+
 end
 
+get '/update/usuarios' do
+  return [404, {}, "Not an ajax request"] unless request.xhr?
+  @listaUsuarios = usuarios
+  erb <<-"HTML"
+  <% @listaUsuarios.each do |usuario| %> 
+  <li class="media">
+    <div class="media-body">
+      <div class="media">
+        <a class="pull-left" href="#">
+          <img class="media-object img-circle" style="max-height:50px;" src="/img/default.png" />
+        </a>
+        <div class="media-body" >
+          <h3><%= usuario %> </h3>
+          <small class="text-muted"><%= t = Time.now
+          t.to_s
+          
+          t = t.strftime "%H:%M" + "-->" + Kronic.format(Time.now) %></small>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </li>
+  <% end %>
+  HTML
+end
+#http://www.ruby-doc.org/core-2.1.5/Array.html
 post '/registro' do
   puts "inside post '/registro/': #{params}"
   if !usuarios.include?(params[:nombre])
@@ -49,9 +77,17 @@ post '/registro' do
 end
 
 get '/logout' do
+  usuarios.delete_if { |a| a == session[:alias] }
+  session.clear
+  redirect '/'
+end
+
+get '/borrar' do
   session.clear
   usuarios.clear
   chat.clear
   @listaUsuarios = usuarios
   redirect '/'
 end
+
+
