@@ -19,4 +19,14 @@ describe "Test Chatina" do
 	  get '/'
 	  expect(last_response).to be_ok
    end
+
+   it "Poder enviar" do
+	  get '/send'
+	  expect(last_response.body).to eq("Not an ajax request")
+   end
+
+   it "Poder Logearse" do
+	  get '/registro'
+	  expect(last_response).to be_ok
+   end
 end

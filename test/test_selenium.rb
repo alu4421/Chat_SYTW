@@ -31,4 +31,18 @@ describe "Chatina Test Selenium" do
 	  assert_equal(@url, @navegador.current_url)
    end
 
+   it "Ver correctamente pagina principal" do
+	  buscar = @navegador.find_element(:id,"title").text
+	  assert_equal("Chat Sinatra", buscar)
+   end
+
+   it "Ingresar con Usuario"
+   	  @navegador.find_element(:id,"nombre").send_keys("UsuarioPrueba")
+	  @navegador.manage.timeouts.implicit_wait = 2
+	  @navegador.find_element(:id,"registro").click
+	  @navegador.manage.timeouts.implicit_wait = 2
+	  @navegador.find_element(:id,"exit").click
+	  assert_equal(@url, @navegador.current_url)
+	end
+
 end
