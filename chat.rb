@@ -30,10 +30,10 @@ get '/update' do
   @updates = chat[params['last'].to_i..-1] || []
   @last = chat.size
   erb <<-"HTML"
-      <% @updates.each do |phrase| %>
-      <%= phrase %> <br />
-      <% end %>
-      <span data-last="<%= @last %>"</span>
+  <% @updates.each do |phrase| %>
+  <%= phrase %> <br />
+  <% end %>
+  <span data-last="<%= @last %>"</span>
   HTML
 
 end
@@ -52,17 +52,17 @@ get '/update/usuarios' do
         <div class="media-body" >
           <h3><%= usuario %> </h3>
           <small class="text-muted"><%= t = Time.now
-          t.to_s
-          
-          t = t.strftime "%H:%M" + "-->" + Kronic.format(Time.now) %></small>
+            t.to_s
+            
+            t = t.strftime "%H:%M" + "-->" + Kronic.format(Time.now) %></small>
+          </div>
         </div>
       </div>
-    </div>
-    <hr>
-  </li>
-  <% end %>
-  HTML
-end
+      <hr>
+    </li>
+    <% end %>
+    HTML
+  end
 #http://www.ruby-doc.org/core-2.1.5/Array.html
 post '/registro' do
   puts "inside post '/registro/': #{params}"

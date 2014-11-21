@@ -11,3 +11,4 @@ gem 'pry'
 gem 'erubis'
 gem 'omniauth'
 gem 'kronic'
+gem 'coveralls', require: false
