@@ -2,16 +2,19 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'pp'
 
-#set :server, 'thin'
+set :server, 'thin'
 
 enable :sessions             
 set :session_secret, '*&(^#234a)'
 
 chat = ['Hola']
-@usuarios = []
-  
+usuarios = Array.new
+@listaUsuarios = []
 
 get ('/') do
+  if @listaUsuarios == nil
+    @listaUsuarios = usuarios
+  end
   erb :index
 end
 
@@ -34,12 +37,21 @@ get '/update' do
 end
 
 post '/registro' do
-  session[:alias] = params[:nombre]
-  @usuarios = session[:alias]
+  puts "inside post '/registro/': #{params}"
+  if !usuarios.include?(params[:nombre])
+    session[:alias] = params[:nombre]
+    usuarios.push(session[:alias])
+    session[:error] = false
+  else
+    session[:error] = true
+  end
   redirect '/'
 end
 
 get '/logout' do
   session.clear
+  usuarios.clear
+  chat.clear
+  @listaUsuarios = usuarios
   redirect '/'
 end
