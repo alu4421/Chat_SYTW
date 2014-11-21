@@ -53,7 +53,6 @@ get '/update/usuarios' do
           <h3><%= usuario %> </h3>
           <small class="text-muted"><%= t = Time.now
             t.to_s
-            
             t = t.strftime "%H:%M" + "-->" + Kronic.format(Time.now) %></small>
           </div>
         </div>
